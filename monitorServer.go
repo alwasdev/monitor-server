@@ -23,7 +23,7 @@ func MonitorServer() {
 func pushHandler(w http.ResponseWriter, r *http.Request) {
 	// Read body
 	b, err := ioutil.ReadAll(r.Body)
-	log.Println("MonitorSnapshot received: ", b)
+	log.Println("MonitorSnapshot received in bytes: ", b)
 
 	defer r.Body.Close()
 	if err != nil {
@@ -35,7 +35,7 @@ func pushHandler(w http.ResponseWriter, r *http.Request) {
 	var msg monitor_client.MonitorSnapshot
 
 	err = json.Unmarshal(b, &msg)
-	log.Println("MonitorSnapshot received: ", msg)
+	log.Println("MonitorSnapshot in type received:", msg)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
